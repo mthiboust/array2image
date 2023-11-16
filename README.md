@@ -116,7 +116,7 @@ image = array_to_image(
 
 </td>
 <td> 
-<img src="a">
+<img src="https://github.com/mthiboust/array2image/blob/a805d35042cbc37bd36f9db9e895b7a018be95fb/docs/a2i_2s1c_colormap_magma.png">
 </td>
 </tr>
 
