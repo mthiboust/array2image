@@ -110,6 +110,25 @@ import matplotlib
 
 image = array_to_image(
   array, 
+  colormap=matplotlib.cm.magma
+  )
+```
+
+</td>
+<td> 
+<img src="a">
+</td>
+</tr>
+
+<tr>
+<td>
+
+```python
+from array2image import array_to_image
+import matplotlib
+
+image = array_to_image(
+  array, 
   colormap=matplotlib.cm.viridis
   )
 ```
