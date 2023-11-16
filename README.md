@@ -41,9 +41,12 @@ array = np.random.uniform(0,1,(8,8))
 ```python
 from array2image import array_to_image
 
-array_to_image(array)
+image = array_to_image(array)
 ```
 
+</td>
+<td> 
+<img src="https://github.com/mthiboust/array2image/blob/52b3dd5e9e48ff3c4064aeb30ac6e7ed3c41a261/docs/a2i_2s1c_default.png">
 </td>
 <td> 
 <img src="https://github.com/mthiboust/array2image/blob/52b3dd5e9e48ff3c4064aeb30ac6e7ed3c41a261/docs/a2i_2s1c_default.png">
