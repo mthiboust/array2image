@@ -51,6 +51,9 @@ image = array_to_image(array)
 <td> 
 <img src="https://github.com/mthiboust/array2image/blob/52b3dd5e9e48ff3c4064aeb30ac6e7ed3c41a261/docs/a2i_2s1c_default.png" width="130px">
 </td>
+<td> 
+<img src="https://github.com/mthiboust/array2image/blob/52b3dd5e9e48ff3c4064aeb30ac6e7ed3c41a261/docs/a2i_2s1c_default.png" width="130px">
+</td>
 </tr>
 
 <tr>
@@ -59,12 +62,18 @@ image = array_to_image(array)
 ```python
 from array2image import array_to_image
 
-array_to_image(array, inverted_colors=True)
+array_to_image(
+  array, 
+  inverted_colors=True
+  )
 ```
 
 </td>
 <td> 
 <img src="https://github.com/mthiboust/array2image/blob/52b3dd5e9e48ff3c4064aeb30ac6e7ed3c41a261/docs/a2i_2s1c_inverted_colors.png" width="130px">>
+</td>
+<td> 
+<img src="https://github.com/mthiboust/array2image/blob/52b3dd5e9e48ff3c4064aeb30ac6e7ed3c41a261/docs/a2i_2s1c_default.png" width="130px">
 </td>
 <td> 
 <img src="https://github.com/mthiboust/array2image/blob/52b3dd5e9e48ff3c4064aeb30ac6e7ed3c41a261/docs/a2i_2s1c_default.png" width="130px">
@@ -87,7 +96,7 @@ image = array_to_image(
 
 </td>
 <td> 
-<img src="https://github.com/mthiboust/array2image/blob/52b3dd5e9e48ff3c4064aeb30ac6e7ed3c41a261/docs/a2i_2s1c_overlimit.png" width="130px">>
+<img src="https://github.com/mthiboust/array2image/blob/52b3dd5e9e48ff3c4064aeb30ac6e7ed3c41a261/docs/a2i_2s1c_overlimit.png" width="130px">
 </td>
 <td> 
 <img src="https://github.com/mthiboust/array2image/blob/52b3dd5e9e48ff3c4064aeb30ac6e7ed3c41a261/docs/a2i_2s1c_default.png" width="130px">
@@ -111,7 +120,7 @@ image = array_to_image(
 
 </td>
 <td> 
-<img src="https://github.com/mthiboust/array2image/blob/8cf3a47b42b650b219326f5b83706a39c3fc090e/docs/a2i_2s1c_overlimit_norm.png" width="130px">>
+<img src="https://github.com/mthiboust/array2image/blob/8cf3a47b42b650b219326f5b83706a39c3fc090e/docs/a2i_2s1c_overlimit_norm.png" width="130px">
 </td>
 </tr>
 
@@ -130,7 +139,7 @@ image = array_to_image(
 
 </td>
 <td> 
-<img src="https://github.com/mthiboust/array2image/blob/a805d35042cbc37bd36f9db9e895b7a018be95fb/docs/a2i_2s1c_colormap_magma.png" width="130px">>
+<img src="https://github.com/mthiboust/array2image/blob/a805d35042cbc37bd36f9db9e895b7a018be95fb/docs/a2i_2s1c_colormap_magma.png" width="130px">
 </td>
 </tr>
 
@@ -149,7 +158,7 @@ image = array_to_image(
 
 </td>
 <td> 
-<img src="https://github.com/mthiboust/array2image/blob/8cf3a47b42b650b219326f5b83706a39c3fc090e/docs/a2i_2s1c_colormap_viridis.png" width="130px">>
+<img src="https://github.com/mthiboust/array2image/blob/8cf3a47b42b650b219326f5b83706a39c3fc090e/docs/a2i_2s1c_colormap_viridis.png" width="130px">
 </td>
 </tr>
 
@@ -169,7 +178,7 @@ image = array_to_image(
 
 </td>
 <td> 
-<img src="https://github.com/mthiboust/array2image/blob/8cf3a47b42b650b219326f5b83706a39c3fc090e/docs/a2i_2s1c_colormap_viridis_show_grid.png" width="130px">>
+<img src="https://github.com/mthiboust/array2image/blob/8cf3a47b42b650b219326f5b83706a39c3fc090e/docs/a2i_2s1c_colormap_viridis_show_grid.png" width="130px">
 </td>
 </tr>
 
@@ -191,7 +200,7 @@ image = array_to_image(
 
 </td>
 <td> 
-<img src="https://github.com/mthiboust/array2image/blob/8cf3a47b42b650b219326f5b83706a39c3fc090e/docs/a2i_2s1c_colormap_viridis_show_grid_zoom5.png" width="130px">>
+<img src="https://github.com/mthiboust/array2image/blob/8cf3a47b42b650b219326f5b83706a39c3fc090e/docs/a2i_2s1c_colormap_viridis_show_grid_zoom5.png" width="130px">
 </td>
 </tr>
 
@@ -212,7 +221,7 @@ image = array_to_image(
 
 </td>
 <td> 
-<img src="https://github.com/mthiboust/array2image/blob/95f81b8400add48e156725d02f99b72d4d470a2a/docs/a2i_2s1c_colormap_viridis_show_grid_zoom30.png" width="130px">>
+<img src="https://github.com/mthiboust/array2image/blob/95f81b8400add48e156725d02f99b72d4d470a2a/docs/a2i_2s1c_colormap_viridis_show_grid_zoom30.png" width="130px">
 </td>
 </tr>
 
@@ -233,7 +242,7 @@ image = array_to_image(
 
 </td>
 <td> 
-<img src="https://github.com/mthiboust/array2image/blob/95f81b8400add48e156725d02f99b72d4d470a2a/docs/a2i_2s1c_colormap_viridis_show_grid_zoom2010.png" width="130px">>
+<img src="https://github.com/mthiboust/array2image/blob/95f81b8400add48e156725d02f99b72d4d470a2a/docs/a2i_2s1c_colormap_viridis_show_grid_zoom2010.png" width="130px">
 </td>
 </tr>
 
