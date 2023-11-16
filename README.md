@@ -108,7 +108,10 @@ image = array_to_image(
 from array2image import array_to_image
 import matplotlib
 
-image = array_to_image(array, colormap=matplotlib.cm.viridis)
+image = array_to_image(
+  array, 
+  colormap=matplotlib.cm.viridis
+  )
 ```
 
 </td>
@@ -176,7 +179,7 @@ image = array_to_image(
 
 </td>
 <td> 
-<img src="https://raw.githubusercontent.com/mthiboust/colormap2d/dev/docs/inverted.png">
+<img src="https://github.com/mthiboust/array2image/blob/95f81b8400add48e156725d02f99b72d4d470a2a/docs/a2i_2s1c_colormap_viridis_show_grid_zoom30.png">
 </td>
 </tr>
 
@@ -197,7 +200,7 @@ image = array_to_image(
 
 </td>
 <td> 
-<img src="https://raw.githubusercontent.com/mthiboust/colormap2d/dev/docs/inverted.png">
+<img src="https://github.com/mthiboust/array2image/blob/95f81b8400add48e156725d02f99b72d4d470a2a/docs/a2i_2s1c_colormap_viridis_show_grid_zoom2010.png">
 </td>
 </tr>
 
