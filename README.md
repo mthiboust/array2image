@@ -44,7 +44,7 @@ array_to_image(array)
 
 </td>
 <td> 
-<img src="https://github.com/mthiboust/array2image/blob/ec7b667c2048a8b85500beeb86442589dee8167a/docs/default.png">
+<img src="https://github.com/mthiboust/array2image/blob/52b3dd5e9e48ff3c4064aeb30ac6e7ed3c41a261/docs/a2i_2s1c_default.png">
 </td>
 </tr>
 
@@ -59,7 +59,7 @@ array_to_image(array, inverted_colors=True)
 
 </td>
 <td> 
-<img src="https://raw.githubusercontent.com/mthiboust/colormap2d/dev/docs/inverted.png">
+<img src="https://github.com/mthiboust/array2image/blob/52b3dd5e9e48ff3c4064aeb30ac6e7ed3c41a261/docs/a2i_2s1c_inverted_colors.png">
 </td>
 </tr>
 
@@ -76,7 +76,7 @@ image = array_to_image(overlimit_array, inverted_colors=True)
 
 </td>
 <td> 
-<img src="https://raw.githubusercontent.com/mthiboust/colormap2d/dev/docs/inverted.png">
+<img src="https://github.com/mthiboust/array2image/blob/52b3dd5e9e48ff3c4064aeb30ac6e7ed3c41a261/docs/a2i_2s1c_overlimit.png">
 </td>
 </tr>
 
