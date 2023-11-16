@@ -40,7 +40,7 @@ array_to_image(array)
 
 </td>
 <td> 
-<img src="https://raw.githubusercontent.com/mthiboust/colormap2d/dev/docs/default.png">
+<img src="https://github.com/mthiboust/array2image/blob/ec7b667c2048a8b85500beeb86442589dee8167a/docs/default.png">
 </td>
 </tr>
 
