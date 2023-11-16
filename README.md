@@ -88,12 +88,16 @@ from array2image import array_to_image
 
 # Values are automatically clipped to the [0:1] range
 overlimit_array = array * 2
-image = array_to_image(overlimit_array, inverted_colors=True,min_max_normalization=True)
+image = array_to_image(
+  overlimit_array, 
+  inverted_colors=True,
+  min_max_normalization=True
+  )
 ```
 
 </td>
 <td> 
-<img src="https://raw.githubusercontent.com/mthiboust/colormap2d/dev/docs/inverted.png">
+<img src="https://github.com/mthiboust/array2image/blob/8cf3a47b42b650b219326f5b83706a39c3fc090e/docs/a2i_2s1c_overlimit_norm.png">
 </td>
 </tr>
 
@@ -109,7 +113,7 @@ image = array_to_image(array, colormap=matplotlib.cm.viridis)
 
 </td>
 <td> 
-<img src="https://raw.githubusercontent.com/mthiboust/colormap2d/dev/docs/inverted.png">
+<img src="https://github.com/mthiboust/array2image/blob/8cf3a47b42b650b219326f5b83706a39c3fc090e/docs/a2i_2s1c_colormap_viridis.png">
 </td>
 </tr>
 
@@ -129,7 +133,7 @@ image = array_to_image(
 
 </td>
 <td> 
-<img src="https://raw.githubusercontent.com/mthiboust/colormap2d/dev/docs/inverted.png">
+<img src="https://github.com/mthiboust/array2image/blob/8cf3a47b42b650b219326f5b83706a39c3fc090e/docs/a2i_2s1c_colormap_viridis_show_grid.png">
 </td>
 </tr>
 
@@ -144,14 +148,14 @@ image = array_to_image(
   array, 
   colormap=matplotlib.cm.viridis, 
   show_grid=True, 
-  zoom_factor=10
+  zoom_factor=5
   )
 
 ```
 
 </td>
 <td> 
-<img src="https://raw.githubusercontent.com/mthiboust/colormap2d/dev/docs/inverted.png">
+<img src="https://github.com/mthiboust/array2image/blob/8cf3a47b42b650b219326f5b83706a39c3fc090e/docs/a2i_2s1c_colormap_viridis_show_grid_zoom5.png">
 </td>
 </tr>
 
