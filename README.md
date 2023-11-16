@@ -86,7 +86,8 @@ array_to_image(
 ```python
 from array2image import array_to_image
 
-# Values are automatically clipped to the [0:1] range
+# Values are automatically clipped 
+# to the [0:1] range
 overlimit_array = array * 2
 image = array_to_image(
   overlimit_array, 
@@ -109,7 +110,8 @@ image = array_to_image(
 ```python
 from array2image import array_to_image
 
-# Values are automatically clipped to the [0:1] range
+# Values are automatically clipped 
+# to the [0:1] range
 overlimit_array = array * 2
 image = array_to_image(
   overlimit_array, 
