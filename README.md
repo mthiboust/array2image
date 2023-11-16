@@ -23,6 +23,8 @@ Requires python 3.10+.
 
 # Usage
 
+## 1-channel arrays
+
 Generate some data:
 ```python
 import numpy as np
@@ -71,7 +73,10 @@ from array2image import array_to_image
 
 # Values are automatically clipped to the [0:1] range
 overlimit_array = array * 2
-image = array_to_image(overlimit_array, inverted_colors=True)
+image = array_to_image(
+  overlimit_array, 
+  inverted_colors=True
+  )
 ```
 
 </td>
@@ -225,5 +230,7 @@ image = array_to_image(
 
 </table>
 
+## 2-channel arrays
 
+## 3-channel arrays
 
