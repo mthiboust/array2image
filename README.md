@@ -37,6 +37,13 @@ array = np.random.uniform(0,1,(8,8))
 <table>
 <tr>
 <td>
+</td>
+<td>Random</td>
+<td>Digit</td>
+<td>Digit * 2</td>
+</tr>
+<tr>
+<td>
 
 ```python
 from array2image import array_to_image
@@ -70,7 +77,7 @@ array_to_image(
 
 </td>
 <td> 
-<img src="https://github.com/mthiboust/array2image/blob/52b3dd5e9e48ff3c4064aeb30ac6e7ed3c41a261/docs/a2i_2s1c_inverted_colors.png" width="100px">>
+<img src="https://github.com/mthiboust/array2image/blob/52b3dd5e9e48ff3c4064aeb30ac6e7ed3c41a261/docs/a2i_2s1c_inverted_colors.png" width="100px">
 </td>
 <td> 
 <img src="https://github.com/mthiboust/array2image/blob/52b3dd5e9e48ff3c4064aeb30ac6e7ed3c41a261/docs/a2i_2s1c_default.png" width="100px">
