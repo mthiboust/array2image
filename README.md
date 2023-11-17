@@ -10,8 +10,11 @@ When given an array, it automatically guesses its spatial and channel dimensions
 If specified, custom colormap functions can be used instead. For instance:
 * `matplotlib.cm.*` functions for 1D channel arrays (like `matplotlib.cm.viridis`)
 * `colormap2d.*` functions for 2D channel arrays (like `colormap2d.pinwheel`)
+* The `matplotlib.colors.hsv_to_rgb` function for 3D channel arrays.`
 
-It assumes that values are floats between 0 and 1 (values are clipped anyway). You can also automatically normalize the values.
+It assumes that values are floats between 0 and 1 or integers between 0 and 255 (values are clipped anyway). If specified, it automatically normalizes the values.
+
+Why not directly use `matplotlib.plt.imshow` instead? If you have 1 or 3-channel data and don't care about the size nor the incrusted axis in the returned image, `matplotlib.plt.imshow` is great. The ***Array2image*** library makes the focus on simplicity by guessing an appropriate way of rendering the image. 
 
 # Installation
 

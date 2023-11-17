@@ -66,7 +66,8 @@ def _guess_spatial_channel_dims(shape: tuple[int, ...]) -> tuple[tuple[int], int
         shape: Shape of the array.
 
     Returns:
-        A tuple of the spatial dimensions (tuple) and the channel dimension (int).
+        Spatial dimensions (tuple).
+        Channel dimension (int).
     """
     match shape:
         case (*s, c) if c <= 3 and len(s) > 0:
