@@ -24,6 +24,41 @@ pip install array2image
 
 Requires python 3.10+.
 
+# Documentation
+
+### Function signature
+```python
+def array_to_image(
+    arr,
+    spatial_dims: tuple[int] | tuple[int, int] | None = None,
+    channel_dim: int | None = None,
+    cmap: Callable | None = None,
+    inverted_colors: bool = False,
+    bin_size: int | tuple[int, int] | None = None,
+    target_total_size: int = 200,
+    grid_thickness: int | tuple[int, ...] = 0,
+    norm: bool = False,
+) -> PIL.Image
+```
+
+### Argument description
+
+* **arr**: Array-like to be converted.
+* **spatial_dims**: Spatial dimensions of the array. If None, spatial dimensions are
+automatically guessed.
+* **channel_dim**: Channel dimension of the array. Only 1, 2 or 3 channel dimension
+arrays can be converted to an image. If None, the channel dimension is
+automatically guessed.
+* **cmap**: Colormap function to be used if provided. If None, default built-in
+functions are used.
+* **inverted_colors**: If True, inverts the color of the image.
+* **bin_size**: Number of pixels for each array spatial element.
+target_total_size: Target size of the image. Used to automatically choose
+`bin_size` if the latter is None.
+* **grid_thickness**: Tuple of grid thickness for each level of 2D spatial dimensions.
+By default, it is 0 for the last 2D dimensions and 2 pixels for the others.
+* **norm**: If True, normalize values between 0 and 1 with a min-max normalization.
+
 # Examples
 
 ## 1-channel arrays
