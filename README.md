@@ -326,10 +326,10 @@ image = array_to_image(array)
 
 </td>
 <td> 
-<img src="https://github.com/mthiboust/array2image/blob/072db6c96721efcdc0171b4d579679786b456f69/docs/a2i_2c_random.png" width="200px">
+<img src="https://github.com/mthiboust/array2image/blob/4eedddcd31a63ed7f9f893cb474a99b89c555642/docs/a2i_3c_random.png" width="200px">
 </td>
 <td> 
-<img src="https://github.com/mthiboust/array2image/blob/072db6c96721efcdc0171b4d579679786b456f69/docs/a2i_2c_fourier.png" width="200px">
+<img src="https://github.com/mthiboust/array2image/blob/4eedddcd31a63ed7f9f893cb474a99b89c555642/docs/a2i_3c_lena.png" width="200px">
 </td>
 </tr>
 
@@ -349,10 +349,10 @@ array_to_image(
 
 </td>
 <td> 
-<img src="https://github.com/mthiboust/array2image/blob/072db6c96721efcdc0171b4d579679786b456f69/docs/a2i_2c_random_cmap.png" width="200px">
+<img src="https://github.com/mthiboust/array2image/blob/4eedddcd31a63ed7f9f893cb474a99b89c555642/docs/a2i_3c_random_cmap.png" width="200px">
 </td>
 <td> 
-<img src="https://github.com/mthiboust/array2image/blob/072db6c96721efcdc0171b4d579679786b456f69/docs/a2i_2c_fourier_cmap.png" width="200px">
+<img src="https://github.com/mthiboust/array2image/blob/4eedddcd31a63ed7f9f893cb474a99b89c555642/docs/a2i_3c_lena_cmap.png" width="200px">
 </td>
 </tr>
 
