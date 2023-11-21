@@ -28,7 +28,7 @@ Requires python 3.10+.
 
 ## 1-channel arrays
 
-Generate some data:
+Data for the following examples:
 ```python
 import numpy as np
 
@@ -185,7 +185,6 @@ image = array_to_image(
 
 ```python
 from array2image import array_to_image
-import matplotlib
 
 # Fix the bin size
 image = array_to_image(
@@ -208,7 +207,6 @@ image = array_to_image(
 
 ```python
 from array2image import array_to_image
-import matplotlib
 
 # Fix a specific asymetric bin size
 image = array_to_image(
@@ -228,6 +226,68 @@ image = array_to_image(
 </table>
 
 ## 2-channel arrays
+
+
+Data for the following examples:
+```python
+import numpy as np
+
+# Random data: A 10x10x2 Numpy array with random values between 0 and 1
+np.random.seed(0)
+array = np.random.uniform(0, 1, (10, 10, 2))
+
+# Dummy fourier data: linearly varying phase and magnitude over a 2D grid
+phase, amplitude = np.meshgrid(np.linspace(0,1,10), np.meshgrid(np.linspace(0,1,10)))
+array = np.stack((phase, amplitude), axis=-1)
+```
+
+<table>
+<tr>
+<td>
+</td>
+<td>Random</td>
+<td>Fourier</td>
+</tr>
+<tr>
+<td>
+
+```python
+from array2image import array_to_image
+
+# Default Hue/Saturation colormap
+image = array_to_image(array)
+```
+
+</td>
+<td> 
+<img src="https://github.com/mthiboust/array2image/blob/8b448f9e3a55961c31c6035a365c9a03d56482d6/docs/a2i_random.png" width="200px">
+</td>
+<td> 
+<img src="https://github.com/mthiboust/array2image/blob/8b448f9e3a55961c31c6035a365c9a03d56482d6/docs/a2i_mnist_6_8_28_28.png" width="200px">
+</td>
+</tr>
+
+<tr>
+<td>
+
+```python
+from array2image import array_to_image
+import colormap2d
+
+# External 2D colormap
+array_to_image(array, cmap=colormap2d.pinwheel)
+```
+
+</td>
+<td> 
+<img src="https://github.com/mthiboust/array2image/blob/8b448f9e3a55961c31c6035a365c9a03d56482d6/docs/a2i_random_grid_0_0.png" width="200px">
+</td>
+<td> 
+<img src="https://github.com/mthiboust/array2image/blob/8b448f9e3a55961c31c6035a365c9a03d56482d6/docs/a2i_mnist_6_8_28_28_grid_0_0.png" width="200px">
+</td>
+</tr>
+
+</table>
 
 ## 3-channel arrays
 
