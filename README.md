@@ -2,7 +2,7 @@
 
 ***Array2image*** helps you convert Numpy arrays to PIL images. It comes with a single function `array_to_image()`.
 
-When given an array, it automatically guesses its spatial and channel dimensions. Images are then represented differently depending on the channel dimension:
+When given an array, it automatically guesses its spatial and channel dimensions. Spatial dimensions greater than 2 are considered as images of images. The resulting image is then represented differently depending on the channel dimension:
 * 1D channel: greyscale image.
 * 2D channel: image with varying hue and saturation.
 * 3D channel: RGB image.
@@ -14,7 +14,7 @@ If specified, custom colormap functions can be used instead. For instance:
 
 It assumes that values are floats between 0 and 1 or integers between 0 and 255 (values are clipped anyway). If specified, it automatically normalizes the values.
 
-Why not directly use `matplotlib.plt.imshow` instead? If you have 1 or 3-channel data and don't care about the size nor the incrusted axis in the returned image, `matplotlib.plt.imshow` is great. The ***Array2image*** library makes the focus on simplicity by guessing an appropriate way of rendering the image. 
+Why not directly use `matplotlib.plt.imshow` instead? If you have 2D array with 1 or 3-channel data and don't care about the size nor the incrusted axis in the returned image, `matplotlib.plt.imshow` is great. The ***Array2image*** library makes the focus on simplicity by guessing an appropriate way of rendering non-generic arrays. 
 
 # Installation
 
@@ -24,7 +24,7 @@ pip install array2image
 
 Requires python 3.10+.
 
-# Usage
+# Examples
 
 ## 1-channel arrays
 
@@ -32,9 +32,13 @@ Generate some data:
 ```python
 import numpy as np
 
-# 8x8 Numpy array with random values between 0 and 1
-np.seed(0)
-array = np.random.uniform(0,1,(8,8))
+# Random data: A 2x4x10x8 Numpy array with random values between 0 and 1
+np.random.seed(0)
+array = np.random.uniform(0, 1, (2, 4, 10, 8))
+
+# MNIST data: The first 48 MNIST digits organized in a 6x8 grid.
+mnist_data = ...
+array = mnist_data[:48].reshape(6, 8, 28, 28)
 ```
 
 <table>
@@ -42,8 +46,7 @@ array = np.random.uniform(0,1,(8,8))
 <td>
 </td>
 <td>Random</td>
-<td>Digit</td>
-<td>Digit * 2</td>
+<td>MNIST</td>
 </tr>
 <tr>
 <td>
@@ -51,6 +54,7 @@ array = np.random.uniform(0,1,(8,8))
 ```python
 from array2image import array_to_image
 
+# Represent only a 4D array
 image = array_to_image(array)
 ```
 
@@ -61,9 +65,6 @@ image = array_to_image(array)
 <td> 
 <img src="https://github.com/mthiboust/array2image/blob/52b3dd5e9e48ff3c4064aeb30ac6e7ed3c41a261/docs/a2i_2s1c_default.png" width="100px">
 </td>
-<td> 
-<img src="https://github.com/mthiboust/array2image/blob/52b3dd5e9e48ff3c4064aeb30ac6e7ed3c41a261/docs/a2i_2s1c_default.png" width="100px">
-</td>
 </tr>
 
 <tr>
@@ -72,10 +73,11 @@ image = array_to_image(array)
 ```python
 from array2image import array_to_image
 
-array_to_image(
+# Force 0 pixel for all grid levels
+image = array_to_image(
   array, 
-  inverted_colors=True
-  )
+  grid_thickness=(0, 0)
+)
 ```
 
 </td>
@@ -96,13 +98,11 @@ array_to_image(
 ```python
 from array2image import array_to_image
 
-# Values are automatically clipped 
-# to the [0:1] range
-overlimit_array = array * 2
+# Invert colors
 image = array_to_image(
-  overlimit_array, 
+  array, 
   inverted_colors=True
-  )
+)
 ```
 
 </td>
@@ -119,15 +119,13 @@ image = array_to_image(
 
 ```python
 from array2image import array_to_image
+import matplotlib
 
-# Values are automatically clipped 
-# to the [0:1] range
-overlimit_array = array * 2
+# Use an external colormap
 image = array_to_image(
-  overlimit_array, 
-  inverted_colors=True,
-  min_max_normalization=True
-  )
+  array,
+  cmap=matplotlib.cm.viridis
+)
 ```
 
 </td>
@@ -143,10 +141,11 @@ image = array_to_image(
 from array2image import array_to_image
 import matplotlib
 
+# Represent only a 2D array
 image = array_to_image(
-  array, 
-  colormap=matplotlib.cm.magma
-  )
+  array[0, 0], 
+  cmap=matplotlib.cm.viridis
+)
 ```
 
 </td>
@@ -162,10 +161,12 @@ image = array_to_image(
 from array2image import array_to_image
 import matplotlib
 
+# Show a grid
 image = array_to_image(
-  array, 
-  colormap=matplotlib.cm.viridis
-  )
+  array[0, 0], 
+  cmap=matplotlib.cm.viridis, 
+  grid_thickness=1
+)
 ```
 
 </td>
@@ -181,11 +182,11 @@ image = array_to_image(
 from array2image import array_to_image
 import matplotlib
 
+# Fix the bin size
 image = array_to_image(
-  array, 
-  colormap=matplotlib.cm.viridis, 
-  show_grid=True
-  )
+  array[0, 0], 
+  bin_size=4
+)
 ```
 
 </td>
@@ -201,63 +202,15 @@ image = array_to_image(
 from array2image import array_to_image
 import matplotlib
 
+# Fix a specific asymetric bin size
 image = array_to_image(
-  array, 
-  colormap=matplotlib.cm.viridis, 
-  show_grid=True, 
-  zoom_factor=5
-  )
-
+  array[0, 0], 
+  bin_size=(4,8)
+)
 ```
 
 </td>
-<td> 
-<img src="https://github.com/mthiboust/array2image/blob/8cf3a47b42b650b219326f5b83706a39c3fc090e/docs/a2i_2s1c_colormap_viridis_show_grid_zoom5.png" width="100px">
-</td>
 </tr>
-
-<tr>
-<td>
-
-```python
-from array2image import array_to_image
-import matplotlib
-
-image = array_to_image(
-  array, 
-  colormap=matplotlib.cm.viridis, 
-  show_grid=True, 
-  zoom_factor=30
-  )
-```
-
-</td>
-<td> 
-<img src="https://github.com/mthiboust/array2image/blob/95f81b8400add48e156725d02f99b72d4d470a2a/docs/a2i_2s1c_colormap_viridis_show_grid_zoom30.png" width="100px">
-</td>
-</tr>
-
-<tr>
-<td>
-
-```python
-from array2image import array_to_image
-import matplotlib
-
-image = array_to_image(
-  array, 
-  colormap=matplotlib.cm.viridis, 
-  show_grid=True, 
-  zoom_factor=(20, 10)
-  )
-```
-
-</td>
-<td> 
-<img src="https://github.com/mthiboust/array2image/blob/95f81b8400add48e156725d02f99b72d4d470a2a/docs/a2i_2s1c_colormap_viridis_show_grid_zoom2010.png" width="100px">
-</td>
-</tr>
-
 </table>
 
 ## 2-channel arrays

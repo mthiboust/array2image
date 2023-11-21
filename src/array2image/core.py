@@ -1,4 +1,4 @@
-"""Utility functions for plotting SOMs."""
+"""Array2image."""
 
 import logging
 from collections.abc import Callable
@@ -7,40 +7,62 @@ import numpy as np
 from PIL import Image
 
 
-def _grid_image(
-    shape: tuple[int, int], patch_shape: tuple[int, int], thickness: int = 1
-) -> Image:
-    """Returns a RGBA PIL image containing a white grid on a transparent background.
-
-    Args:
-        shape: Width and height of the image.
-        patch_shape: Size of each grid element.
-        thickness: Thickness of the grid lines.
-
-    Returns:
-        A PIL image with a white grid on a transparent background.
-    """
-    y, x = shape
-    p_y, p_x = patch_shape
-
-    if min(p_x, p_y) < 3:
+def _ensure_tuple(x):
+    if isinstance(x, tuple) and len(x) == 2:
+        return x
+    elif isinstance(x, int):
+        return (x, x)
+    else:
         raise ValueError(
-            f"Patches of shape {patch_shape} are too small to be overlapped by a grid."
+            f"Type of {x} should be either `int` or `tuple[int, int]`, not {type(x)}."
         )
 
-    arr = np.zeros((x, y, 4))
 
-    # Add horizontal bands
-    for i in range(0, x // p_x + 1):
-        k = i * p_x
-        arr[np.maximum(k - thickness, 0) : np.minimum(k + thickness, x), :, :] = 1
+def _add_grid(
+    arr: np.ndarray,
+    spacing: int | tuple[int, int],
+    thickness: int | tuple[int, int] = 1,
+    color: float = 1.0,
+) -> np.ndarray:
+    """Adds a grid to an array.
 
-    # Add vertical bands
-    for i in range(0, y // p_y + 1):
-        k = i * p_y
-        arr[:, np.maximum(k - thickness, 0) : np.minimum(k + thickness, y), :] = 1
+    The spacing parameter should be a divisor of the array spatial dimensions.
 
-    return Image.fromarray(np.uint8(arr * 255), "RGBA")
+    Args:
+        arr: Numpy array whose last 3 dimensions are spatial (x, y) and channel (c).
+        spacing: Spacing to be applied. Must be a divisor of the array spatial dims.
+        thickness: Thickness of the grid line.
+        color: Color of the grid line. White is 1, black is 0.
+
+    Returns:
+        An array with modified spatial dimensions.
+    """
+    *s, x, y, c = arr.shape
+    sx, sy = _ensure_tuple(spacing)
+    tx, ty = _ensure_tuple(thickness)
+
+    if x % sx != 0 or y % sy != 0:
+        raise ValueError(f"{x} (resp {y}) should be divisible by {sx} (resp {sy}).")
+
+    arr = arr.reshape(tuple(s) + (x // sx, sx, y // sy, sy, c))
+
+    # Add the internal grid, including the trailing vertical and horizontal lines.
+    pad_width = [(0, 0) for i in range(arr.ndim)]
+    pad_width[-4] = (0, tx)
+    pad_width[-2] = (0, ty)
+    pad_width = tuple(pad_width)
+    arr = np.pad(arr, pad_width, mode="constant", constant_values=color)
+
+    arr = arr.reshape(tuple(s) + ((x // sx) * (sx + tx), (y // sy) * (sy + ty), c))
+
+    # Add the missing leading vertical and horizontal lines.
+    pad_width = [(0, 0) for i in range(arr.ndim)]
+    pad_width[-3] = (tx, 0)
+    pad_width[-2] = (ty, 0)
+    pad_width = tuple(pad_width)
+    arr = np.pad(arr, pad_width, mode="constant", constant_values=color)
+
+    return arr
 
 
 def _guess_spatial_channel_dims(shape: tuple[int, ...]) -> tuple[tuple[int], int]:
@@ -66,8 +88,7 @@ def _guess_spatial_channel_dims(shape: tuple[int, ...]) -> tuple[tuple[int], int
         shape: Shape of the array.
 
     Returns:
-        Spatial dimensions (tuple).
-        Channel dimension (int).
+        A tuple of the spatial dimensions (tuple) and the channel dimension (int).
     """
     match shape:
         case (*s, c) if c <= 3 and len(s) > 0:
@@ -78,57 +99,73 @@ def _guess_spatial_channel_dims(shape: tuple[int, ...]) -> tuple[tuple[int], int
 
 
 def array_to_image(
-    arr: np.array,
+    arr,
     spatial_dims: tuple[int] | tuple[int, int] | None = None,
     channel_dim: int | None = None,
-    colormap: Callable | None = None,
+    cmap: Callable | None = None,
     inverted_colors: bool = False,
-    zoom_factor: int | tuple[int, int] | None = None,
-    show_grid: bool = False,
-    min_max_normalization: bool = False,
+    bin_size: int | tuple[int, int] | None = None,
+    target_total_size: int = 200,
+    grid_thickness: int | tuple[int, ...] = 0,
+    norm: bool = False,
 ) -> Image:
     """Converts an array-like to a PIL image.
 
-    Useful function to get an overview of a 2D array containing a 1D/2D/3D channel.
-    Values are represented differently depending on the channel dimension:
+    Visualization function to get a quick overview of a 2D/4D/nD array containing a
+    1D/2D/3D channel.
+
+    When given an array, it automatically guesses its spatial and channel dimensions.
+    Spatial dimensions greater than 2 are considered as images of images. The resulting
+    image is then represented differently depending on the channel dimension:
     * 1D channel: greyscale image.
-    * 2D channel: color image with varying hue and saturation.
+    * 2D channel: image with varying hue and saturation.
     * 3D channel: RGB image.
 
     If specified, custom colormap functions can be used instead. For instance:
     * `matplotlib.cm.*` functions for 1D channel arrays (like `matplotlib.cm.viridis`)
     * `colormap2d.*` functions for 2D channel arrays (like `colormap2d.pinwheel`)
+    * The `matplotlib.colors.hsv_to_rgb` function for 3D channel arrays.`
 
-    Assumes that values are floats between 0 and 1 (values are clipped anyway).
+    It assumes that values are floats between 0 and 1 or integers between 0 and 255
+    (values are clipped anyway). If specified, it automatically normalizes the values.
 
     Args:
-        arr: Array to be converted.
-        spatial_dims: Spatial dimensions of the array. Only 1 or 2 spatial dimension
-            arrays can be converted to an image.
+        arr: Array-like to be converted.
+        spatial_dims: Spatial dimensions of the array. If None, spatial dimensions are
+            automatically guessed.
         channel_dim: Channel dimension of the array. Only 1, 2 or 3 channel dimension
-            arrays can be converted to an image.
-        colormap: Colormap function to be used instead of the built-in functions.
+            arrays can be converted to an image. If None, the channel dimension is
+            automatically guessed.
+        cmap: Colormap function to be used if provided. If None, default built-in
+            functions are used.
         inverted_colors: If True, inverts the color of the image.
-        zoom_factor: Number of pixels for each array spatial element.
-        show_grid: If True, adds a grid to separate the representation of each element.
-        min_max_normalization: If True, normalize the values between 0 and 1.
+        bin_size: Number of pixels for each array spatial element.
+        target_total_size: Target size of the image. Used to automatically choose
+            `bin_size` if the latter is None.
+        grid_thickness: Tuple of grid thickness for each level of 2D spatial dimensions.
+            By default, it is 0 for the last 2D dimensions and 2 pixels for the others.
+        norm: If True, normalize values between 0 and 1 with a min-max normalization.
     """
-    if min_max_normalization:
+    arr = np.asarray(arr)
+
+    if np.issubdtype(arr.dtype, np.integer):
+        arr = arr / 255
+
+    if not np.issubdtype(arr.dtype, np.floating):
+        raise TypeError(
+            "The array values should be either floats between 0 and 1, or integers "
+            "between 0 and 255."
+        )
+
+    if norm:
         min_val = arr.min()
         max_val = arr.max()
         arr = (arr - min_val) / (max_val - min_val)
 
-    elif not np.issubdtype(arr.dtype, np.floating):
-        logging.info(
-            "The array values are not float numbers. "
-            "Values are expected to be in the [0:1] range to be converted to an image."
-            "You may want to use the `min-max-normalization=True` argument instead."
-        )
-
     elif arr.min() < 0 or arr.max() > 1:
         logging.warning(
             "Clipping values not in the [0:1] range. "
-            "You may want to use the `min-max-normalization=True` argument instead."
+            "You may want to use the `norm=True` argument."
         )
         arr = np.clip(arr, 0.0, 1.0)
 
@@ -139,53 +176,87 @@ def array_to_image(
     if spatial_dims is None or channel_dim is None:
         spatial_dims, channel_dim = _guess_spatial_channel_dims(arr.shape)
 
-    if len(spatial_dims) == 1:
+    # Make sure that the number of spatial dims is a multiple of 2
+    if len(spatial_dims) % 2 == 1:
         spatial_dims = (1,) + spatial_dims
-    elif len(spatial_dims) > 2:
-        raise ValueError("Could not represent array of more than 2 spatial dimensions.")
+
+    if channel_dim > 3:
+        raise ValueError(
+            f"Cannot represent `channel_dim` of {channel_dim}."
+            f"Possible values: 1, 2 or 3"
+        )
 
     # Force a 3D array with 2 spatial dimensions and 1 channel dimension
     arr = arr.reshape(spatial_dims + (channel_dim,))
-    assert len(arr.shape) == 3
+    # assert len(arr.shape) == 3
 
-    if colormap is not None:
-        arr = colormap(arr)
-        img = Image.fromarray(np.uint8(arr * 255), "RGBA")
+    # print(f"before colormap: {arr.shape=}")
+    if cmap is not None:
+        _shape = arr.shape
+        if channel_dim == 1:
+            # Matplotlib colormap functions need no channel dimension
+            arr = arr.squeeze(axis=-1)
 
-    else:
-        match channel_dim:
-            case 1:
-                img = Image.fromarray(np.uint8(arr.squeeze() * 255), "L")
+        # Apply colormap and make sure to only keep 3 channels
+        # (matplotlib colormap functions returns 4 channels RGBA).
+        arr = cmap(arr)
 
-            case 2:
-                # Increase the channel from 2 to 3 by padding with 1s.
-                arr = np.concatenate((arr, np.ones(spatial_dims + (1,))), axis=-1)
-                img = Image.fromarray(np.uint8(arr * 255), "HSV")
-                img = img.convert("RGB")
+        if len(arr.shape) > len(_shape):
+            raise ValueError(
+                "The colormap function has changed the number of dimensions "
+                f"of the array from {_shape} to {arr.shape}. "
+                "Make sure this colormap function is adapted to array with a "
+                f"channel dimension of {channel_dim}."
+            )
 
-            case 3:
-                img = Image.fromarray(np.uint8(arr * 255), "RGB")
+    elif cmap is None and channel_dim == 2:
+        # Add a third channel filled with 1s and consider those values as HSV values.
+        arr = np.concatenate((arr, np.ones(spatial_dims + (1,))), axis=-1)
+        arr = matplotlib.colors.hsv_to_rgb(arr)
 
-            case _:
-                raise ValueError(
-                    f"Cannot represent `channel_dim` of {channel_dim}."
-                    f"Possible values: 1, 2 or 3"
-                )
-
-    dim_x, dim_y = arr.shape[:2]
-
-    if zoom_factor is None:
+    if bin_size is None:
         # Try to guess a convenient scale_factor
-        IMG_COMMON_DIMENSION = 200
-        zoom_factor = max(1, IMG_COMMON_DIMENSION // max(dim_x, dim_y))
+        x_charac = int(np.prod(spatial_dims[::2]))
+        y_charac = int(np.prod(spatial_dims[1::2]))
+        bin_size = max(1, target_total_size // max(x_charac, y_charac))
 
-    if isinstance(zoom_factor, int):
-        zoom_factor = (zoom_factor, zoom_factor)
+    bin_size = _ensure_tuple(bin_size)
 
-    img = img.resize((dim_y * zoom_factor[0], dim_x * zoom_factor[1]), Image.NEAREST)
+    if bin_size != (1, 1):
+        # Rescale each value to a bin of bin_size[0]*bin_size[1] pixels.
+        *s, x, y, c = arr.shape
+        arr = arr.reshape(tuple(s) + (x, 1, y, 1, c))
+        arr = arr * np.ones(tuple(s) + (x, bin_size[0], y, bin_size[1], c))
+        arr = arr.reshape(tuple(s) + (x * bin_size[0], y * bin_size[1], c))
 
-    if show_grid:
-        grid_image = _grid_image(img.size, zoom_factor, thickness=1)
-        img.paste(grid_image, (0, 0), mask=grid_image)
+    # Set default grid thicknesses for all levels if not provided
+    grid_thickness = (
+        [grid_thickness] if isinstance(grid_thickness, int) else list(grid_thickness)
+    )
 
-    return img
+    while len(grid_thickness) < len(spatial_dims) // 2:
+        grid_thickness.insert(0, max(2, grid_thickness[0]))
+
+    if (thickness := grid_thickness.pop()) != 0:
+        arr = _add_grid(arr, bin_size, thickness)
+
+    # If array has more than 3 spatial dimensions, iterate to make images of images
+    while len(arr.shape) >= 5:
+        *s, xx, yy, x, y, c = arr.shape
+
+        arr = arr.swapaxes(-4, -3)
+        arr = arr.reshape(tuple(s) + (xx * x, yy * y, c))
+
+        if (thickness := grid_thickness.pop()) != 0:
+            arr = _add_grid(arr, (x, y), thickness)
+
+    # Return the corresponding PIL image
+    match arr.shape[-1]:
+        case 1:
+            return Image.fromarray(np.uint8(arr.squeeze(axis=-1) * 255), "L")
+        case 3:
+            return Image.fromarray(np.uint8(arr * 255), "RGB")
+        case 4:
+            return Image.fromarray(np.uint8(arr * 255), "RGBA")
+        case _:
+            raise ValueError(f"{arr.shape=}")
