@@ -100,7 +100,7 @@ def _guess_spatial_channel_dims(shape: tuple[int, ...]) -> tuple[tuple[int], int
 
 def array_to_image(
     arr,
-    spatial_dims: tuple[int] | tuple[int, int] | None = None,
+    spatial_dims: tuple[int, ...] | None = None,
     channel_dim: int | None = None,
     cmap: Callable | None = None,
     inverted_colors: bool = False,
@@ -212,7 +212,6 @@ def array_to_image(
     elif cmap is None and channel_dim == 2:
         # Add a third channel filled with 1s and consider those values as HSV values.
         arr = np.concatenate((arr, np.ones(spatial_dims + (1,))), axis=-1)
-        arr = matplotlib.colors.hsv_to_rgb(arr)
 
     if bin_size is None:
         # Try to guess a convenient scale_factor

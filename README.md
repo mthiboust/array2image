@@ -30,7 +30,7 @@ Requires python 3.10+.
 ```python
 def array_to_image(
     arr,
-    spatial_dims: tuple[int] | tuple[int, int] | None = None,
+    spatial_dims: tuple[int, ...] | None = None,
     channel_dim: int | None = None,
     cmap: Callable | None = None,
     inverted_colors: bool = False,
