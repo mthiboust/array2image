@@ -60,10 +60,10 @@ image = array_to_image(array)
 
 </td>
 <td> 
-<img src="https://github.com/mthiboust/array2image/blob/52b3dd5e9e48ff3c4064aeb30ac6e7ed3c41a261/docs/a2i_2s1c_default.png" width="100px">
+<img src="https://github.com/mthiboust/array2image/blob/8b448f9e3a55961c31c6035a365c9a03d56482d6/docs/a2i_random.png" width="100px">
 </td>
 <td> 
-<img src="https://github.com/mthiboust/array2image/blob/52b3dd5e9e48ff3c4064aeb30ac6e7ed3c41a261/docs/a2i_2s1c_default.png" width="100px">
+<img src="https://github.com/mthiboust/array2image/blob/8b448f9e3a55961c31c6035a365c9a03d56482d6/docs/a2i_mnist_6_8_28_28.png" width="100px">
 </td>
 </tr>
 
@@ -82,13 +82,10 @@ image = array_to_image(
 
 </td>
 <td> 
-<img src="https://github.com/mthiboust/array2image/blob/52b3dd5e9e48ff3c4064aeb30ac6e7ed3c41a261/docs/a2i_2s1c_inverted_colors.png" width="100px">
+<img src="https://github.com/mthiboust/array2image/blob/8b448f9e3a55961c31c6035a365c9a03d56482d6/docs/a2i_random_grid_0_0.png" width="100px">
 </td>
 <td> 
-<img src="https://github.com/mthiboust/array2image/blob/52b3dd5e9e48ff3c4064aeb30ac6e7ed3c41a261/docs/a2i_2s1c_default.png" width="100px">
-</td>
-<td> 
-<img src="https://github.com/mthiboust/array2image/blob/52b3dd5e9e48ff3c4064aeb30ac6e7ed3c41a261/docs/a2i_2s1c_default.png" width="100px">
+<img src="https://github.com/mthiboust/array2image/blob/8b448f9e3a55961c31c6035a365c9a03d56482d6/docs/a2i_mnist_6_8_28_28_grid_0_0.png" width="100px">
 </td>
 </tr>
 
@@ -107,10 +104,10 @@ image = array_to_image(
 
 </td>
 <td> 
-<img src="https://github.com/mthiboust/array2image/blob/52b3dd5e9e48ff3c4064aeb30ac6e7ed3c41a261/docs/a2i_2s1c_overlimit.png" width="100px">
+<img src="https://github.com/mthiboust/array2image/blob/8b448f9e3a55961c31c6035a365c9a03d56482d6/docs/a2i_random_grid_0_0_inverted_colors.png" width="100px">
 </td>
 <td> 
-<img src="https://github.com/mthiboust/array2image/blob/52b3dd5e9e48ff3c4064aeb30ac6e7ed3c41a261/docs/a2i_2s1c_default.png" width="100px">
+<img src="https://github.com/mthiboust/array2image/blob/8b448f9e3a55961c31c6035a365c9a03d56482d6/docs/a2i_mnist_6_8_28_28_inverted_colors.png" width="100px">
 </td>
 </tr>
 
@@ -130,10 +127,12 @@ image = array_to_image(
 
 </td>
 <td> 
-<img src="https://github.com/mthiboust/array2image/blob/8cf3a47b42b650b219326f5b83706a39c3fc090e/docs/a2i_2s1c_overlimit_norm.png" width="100px">
+<img src="https://github.com/mthiboust/array2image/blob/8b448f9e3a55961c31c6035a365c9a03d56482d6/docs/a2i_random_grid_0_0_cmap_viridis.png" width="100px">
 </td>
 </tr>
-
+<td> 
+<img src="https://github.com/mthiboust/array2image/blob/8b448f9e3a55961c31c6035a365c9a03d56482d6/docs/a2i_mnist_6_8_28_28_cmap_viridis.png" width="100px">
+</td>
 <tr>
 <td>
 
