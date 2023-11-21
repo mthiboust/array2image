@@ -260,10 +260,10 @@ image = array_to_image(array)
 
 </td>
 <td> 
-<img src="https://github.com/mthiboust/array2image/blob/8b448f9e3a55961c31c6035a365c9a03d56482d6/docs/a2i_random.png" width="200px">
+<img src="https://github.com/mthiboust/array2image/blob/072db6c96721efcdc0171b4d579679786b456f69/docs/a2i_2c_random.png" width="200px">
 </td>
 <td> 
-<img src="https://github.com/mthiboust/array2image/blob/8b448f9e3a55961c31c6035a365c9a03d56482d6/docs/a2i_mnist_6_8_28_28.png" width="200px">
+<img src="https://github.com/mthiboust/array2image/blob/072db6c96721efcdc0171b4d579679786b456f69/docs/a2i_2c_fourier.png" width="200px">
 </td>
 </tr>
 
@@ -280,10 +280,10 @@ array_to_image(array, cmap=colormap2d.pinwheel)
 
 </td>
 <td> 
-<img src="https://github.com/mthiboust/array2image/blob/8b448f9e3a55961c31c6035a365c9a03d56482d6/docs/a2i_random_grid_0_0.png" width="200px">
+<img src="https://github.com/mthiboust/array2image/blob/072db6c96721efcdc0171b4d579679786b456f69/docs/a2i_2c_random_cmap.png" width="200px">
 </td>
 <td> 
-<img src="https://github.com/mthiboust/array2image/blob/8b448f9e3a55961c31c6035a365c9a03d56482d6/docs/a2i_mnist_6_8_28_28_grid_0_0.png" width="200px">
+<img src="https://github.com/mthiboust/array2image/blob/072db6c96721efcdc0171b4d579679786b456f69/docs/a2i_2c_fourier_cmap.png" width="200px">
 </td>
 </tr>
 
