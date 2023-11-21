@@ -275,7 +275,10 @@ from array2image import array_to_image
 import colormap2d
 
 # External 2D colormap
-array_to_image(array, cmap=colormap2d.pinwheel)
+array_to_image(
+  array, 
+  cmap=colormap2d.pinwheel
+)
 ```
 
 </td>
@@ -291,3 +294,66 @@ array_to_image(array, cmap=colormap2d.pinwheel)
 
 ## 3-channel arrays
 
+Data for the following examples:
+```python
+import numpy as np
+
+# Random data: A 10x10x3 Numpy array with random values between 0 and 1
+np.random.seed(0)
+array = np.random.uniform(0, 1, (10, 10, 3))
+
+# The Lena RGB image
+image = Image.open("lena.png")
+array = np.asarray(image)
+```
+
+<table>
+<tr>
+<td>
+</td>
+<td>Random</td>
+<td>Lena</td>
+</tr>
+<tr>
+<td>
+
+```python
+from array2image import array_to_image
+
+# Default RGB colormap
+image = array_to_image(array)
+```
+
+</td>
+<td> 
+<img src="https://github.com/mthiboust/array2image/blob/072db6c96721efcdc0171b4d579679786b456f69/docs/a2i_2c_random.png" width="200px">
+</td>
+<td> 
+<img src="https://github.com/mthiboust/array2image/blob/072db6c96721efcdc0171b4d579679786b456f69/docs/a2i_2c_fourier.png" width="200px">
+</td>
+</tr>
+
+<tr>
+<td>
+
+```python
+from array2image import array_to_image
+import matplotlib
+
+# External 3D colormap
+array_to_image(
+  array, 
+  cmap=matplotlib.colors.hsv_to_rgb
+)
+```
+
+</td>
+<td> 
+<img src="https://github.com/mthiboust/array2image/blob/072db6c96721efcdc0171b4d579679786b456f69/docs/a2i_2c_random_cmap.png" width="200px">
+</td>
+<td> 
+<img src="https://github.com/mthiboust/array2image/blob/072db6c96721efcdc0171b4d579679786b456f69/docs/a2i_2c_fourier_cmap.png" width="200px">
+</td>
+</tr>
+
+</table>
