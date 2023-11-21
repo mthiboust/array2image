@@ -60,10 +60,10 @@ image = array_to_image(array)
 
 </td>
 <td> 
-<img src="https://github.com/mthiboust/array2image/blob/8b448f9e3a55961c31c6035a365c9a03d56482d6/docs/a2i_random.png" width="100px">
+<img src="https://github.com/mthiboust/array2image/blob/8b448f9e3a55961c31c6035a365c9a03d56482d6/docs/a2i_random.png" width="150px">
 </td>
 <td> 
-<img src="https://github.com/mthiboust/array2image/blob/8b448f9e3a55961c31c6035a365c9a03d56482d6/docs/a2i_mnist_6_8_28_28.png" width="100px">
+<img src="https://github.com/mthiboust/array2image/blob/8b448f9e3a55961c31c6035a365c9a03d56482d6/docs/a2i_mnist_6_8_28_28.png" width="150px">
 </td>
 </tr>
 
@@ -82,10 +82,10 @@ image = array_to_image(
 
 </td>
 <td> 
-<img src="https://github.com/mthiboust/array2image/blob/8b448f9e3a55961c31c6035a365c9a03d56482d6/docs/a2i_random_grid_0_0.png" width="100px">
+<img src="https://github.com/mthiboust/array2image/blob/8b448f9e3a55961c31c6035a365c9a03d56482d6/docs/a2i_random_grid_0_0.png" width="150px">
 </td>
 <td> 
-<img src="https://github.com/mthiboust/array2image/blob/8b448f9e3a55961c31c6035a365c9a03d56482d6/docs/a2i_mnist_6_8_28_28_grid_0_0.png" width="100px">
+<img src="https://github.com/mthiboust/array2image/blob/8b448f9e3a55961c31c6035a365c9a03d56482d6/docs/a2i_mnist_6_8_28_28_grid_0_0.png" width="150px">
 </td>
 </tr>
 
@@ -104,10 +104,10 @@ image = array_to_image(
 
 </td>
 <td> 
-<img src="https://github.com/mthiboust/array2image/blob/8b448f9e3a55961c31c6035a365c9a03d56482d6/docs/a2i_random_grid_0_0_inverted_colors.png" width="100px">
+<img src="https://github.com/mthiboust/array2image/blob/8b448f9e3a55961c31c6035a365c9a03d56482d6/docs/a2i_random_grid_0_0_inverted_colors.png" width="150px">
 </td>
 <td> 
-<img src="https://github.com/mthiboust/array2image/blob/8b448f9e3a55961c31c6035a365c9a03d56482d6/docs/a2i_mnist_6_8_28_28_inverted_colors.png" width="100px">
+<img src="https://github.com/mthiboust/array2image/blob/8b448f9e3a55961c31c6035a365c9a03d56482d6/docs/a2i_mnist_6_8_28_28_inverted_colors.png" width="150px">
 </td>
 </tr>
 
@@ -127,12 +127,12 @@ image = array_to_image(
 
 </td>
 <td> 
-<img src="https://github.com/mthiboust/array2image/blob/8b448f9e3a55961c31c6035a365c9a03d56482d6/docs/a2i_random_grid_0_0_cmap_viridis.png" width="100px">
+<img src="https://github.com/mthiboust/array2image/blob/8b448f9e3a55961c31c6035a365c9a03d56482d6/docs/a2i_random_grid_0_0_cmap_viridis.png" width="150px">
+</td>
+<td> 
+<img src="https://github.com/mthiboust/array2image/blob/8b448f9e3a55961c31c6035a365c9a03d56482d6/docs/a2i_mnist_6_8_28_28_cmap_viridis.png" width="150px">
 </td>
 </tr>
-<td> 
-<img src="https://github.com/mthiboust/array2image/blob/8b448f9e3a55961c31c6035a365c9a03d56482d6/docs/a2i_mnist_6_8_28_28_cmap_viridis.png" width="100px">
-</td>
 <tr>
 <td>
 
@@ -149,7 +149,10 @@ image = array_to_image(
 
 </td>
 <td> 
-<img src="https://github.com/mthiboust/array2image/blob/a805d35042cbc37bd36f9db9e895b7a018be95fb/docs/a2i_2s1c_colormap_magma.png" width="100px">
+<img src="https://github.com/mthiboust/array2image/blob/9b25a4e2db5db8402058b9f6651894b82cf264ce/docs/a2i_random_0_0_cmap_viridis.png" width="150px">
+</td>
+<td> 
+<img src="https://github.com/mthiboust/array2image/blob/9b25a4e2db5db8402058b9f6651894b82cf264ce/docs/a2i_mnist_28_28.png" width="150px">
 </td>
 </tr>
 
@@ -170,7 +173,10 @@ image = array_to_image(
 
 </td>
 <td> 
-<img src="https://github.com/mthiboust/array2image/blob/8cf3a47b42b650b219326f5b83706a39c3fc090e/docs/a2i_2s1c_colormap_viridis.png" width="100px">
+<img src="https://github.com/mthiboust/array2image/blob/9b25a4e2db5db8402058b9f6651894b82cf264ce/docs/a2i_random_0_0_cmap_viridis_grid_1.png" width="150px">
+</td>
+<td> 
+<img src="https://github.com/mthiboust/array2image/blob/9b25a4e2db5db8402058b9f6651894b82cf264ce/docs/a2i_mnist_28_28_grid_1.png" width="150px">
 </td>
 </tr>
 
@@ -190,7 +196,10 @@ image = array_to_image(
 
 </td>
 <td> 
-<img src="https://github.com/mthiboust/array2image/blob/8cf3a47b42b650b219326f5b83706a39c3fc090e/docs/a2i_2s1c_colormap_viridis_show_grid.png" width="100px">
+<img src="https://github.com/mthiboust/array2image/blob/9b25a4e2db5db8402058b9f6651894b82cf264ce/docs/a2i_random_0_0_bin_2.png" width="150px">
+</td>
+<td> 
+<img src="https://github.com/mthiboust/array2image/blob/9b25a4e2db5db8402058b9f6651894b82cf264ce/docs/a2i_mnist_28_28_grid_1_bin_4.png" width="150px">
 </td>
 </tr>
 
@@ -208,6 +217,12 @@ image = array_to_image(
 )
 ```
 
+</td>
+<td> 
+<img src="https://github.com/mthiboust/array2image/blob/9b25a4e2db5db8402058b9f6651894b82cf264ce/docs/a2i_random_0_0_bin_2_4.png" width="150px">
+</td>
+<td> 
+<img src="https://github.com/mthiboust/array2image/blob/9b25a4e2db5db8402058b9f6651894b82cf264ce/docs/a2i_mnist_28_28_grid_1_bin_4_8.png" width="150px">
 </td>
 </tr>
 </table>
