@@ -1,0 +1,57 @@
+[project]
+name = "array2image"
+version = "0.1.0"
+description = "Converts a Numpy array to a PIL image."
+authors = [
+    {name = "Matthieu Thiboust", email = "14574229+mthiboust@users.noreply.github.com"},
+]
+dependencies = [
+    "numpy>=1.26.2",
+    "pillow>=8.4.0",
+]
+requires-python = ">=3.10"
+readme = "README.md"
+license = {text = "Apache 2.0"}
+
+dev = [
+    "pytest>=7.4.3",
+    "ruff>=0.1.5",
+]
+
+[build-system]
+requires = ["pdm-backend"]
+build-backend = "pdm.backend"
+
+[tool.ruff]
+line-length = 88
+#extend-include = [
+#    "*.ipynb",
+#]
+select = [
+    "D",
+    "E",
+    "F",
+    "I001",
+]
+ignore = [
+    "D206",
+    "F722",
+]
+ignore-init-module-imports = true
+fixable = [
+    "I001",
+    "F401",
+]
+
+[tool.ruff.isort]
+combine-as-imports = true
+lines-after-imports = 2
+order-by-type = false
+
+[tool.ruff.pydocstyle]
+convention = "google"
+[tool.pdm.dev-dependencies]
+dev = [
+    "pytest>=7.4.3",
+    "ruff>=0.1.5",
+]
